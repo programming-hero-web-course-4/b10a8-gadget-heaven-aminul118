@@ -6,20 +6,20 @@ const Navbar = () => {
   const navbarLinks = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to={`/`}>Home</NavLink>
       </li>
       <li>
-        <NavLink>Statistics</NavLink>
+        <NavLink to={`/statistics`}>Statistics</NavLink>
       </li>
       <li>
-        <NavLink>Dashboard</NavLink>
+        <NavLink to={`dashboard`}>Dashboard</NavLink>
       </li>
     </>
   );
 
   return (
     <div>
-      <div className="navbar container mx-auto ">
+      <div className="navbar container mx-auto py-4">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
