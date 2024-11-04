@@ -4,13 +4,16 @@ import WishlistPage from "./WishlistPage";
 import { useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
-  const [isCartView, setIsCartView] = useState(true); 
-  const allProducts = useLoaderData(); 
-  console.log(allProducts); 
+  const [isCartView, setIsCartView] = useState(true);
+  const allProducts = useLoaderData();
+
+  // Fallback if allProducts is undefined or null
+  if (!allProducts || allProducts.length === 0) {
+    return <p>Loading products...</p>;
+  }
 
   return (
     <div>
-  
       <div className="hero bg-[#9538E2] rounded-3xl py-8 mb-8">
         <div className="hero-content text-center text-white">
           <div className="max-w-md">
@@ -21,12 +24,13 @@ const Dashboard = () => {
               it all!
             </p>
 
-
             <div>
               <button
                 onClick={() => setIsCartView(true)}
                 className={`btn rounded-full w-32 mb-10 ${
-                  isCartView ? "bg-white text-black" : ""
+                  isCartView
+                    ? "bg-white text-black border-2 border-black shadow-md"
+                    : ""
                 }`}
               >
                 Cart
@@ -34,7 +38,9 @@ const Dashboard = () => {
               <button
                 onClick={() => setIsCartView(false)}
                 className={`btn rounded-full mb-10 w-32 ml-3 ${
-                  !isCartView ? "bg-white text-black" : ""
+                  !isCartView
+                    ? "bg-white text-black border-2 border-black shadow-md"
+                    : ""
                 }`}
               >
                 WishList
@@ -44,8 +50,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-
-      {isCartView ? <CartPage allProducts={allProducts} /> : <WishlistPage />}
+      {/* Render CartPage or WishlistPage based on the state */}
+      {isCartView ? (
+        <CartPage allProducts={allProducts} />
+      ) : (
+        <WishlistPage allProducts={allProducts} />
+      )}
     </div>
   );
 };

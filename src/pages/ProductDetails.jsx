@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
-import { addToStoredList } from "../utility/addToDatabase";
+import { FaRegHeart, FaHeart } from "react-icons/fa"; 
+import { addToStoredList, addToStoredWishList } from "../utility/addToDatabase";
 
 const ProductDetails = () => {
   const { productname } = useParams();
   const allProducts = useLoaderData();
   const [newProduct, setNewProduct] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false); 
 
   useEffect(() => {
     const findMatchingProduct = allProducts.find(
@@ -25,16 +27,24 @@ const ProductDetails = () => {
     product_image,
     price,
     description,
-    Specification,
+    Specification = [], 
     rating,
     availability,
-    
   } = newProduct;
 
+  const handleToCart = (id) => {
+    addToStoredList(id);
+  };
 
-  const handleToCart=(id)=>{
-    addToStoredList(id)
-  }
+  const handleFavouriteHeart = (id) => {
+    addToStoredWishList(id);
+    toggleFavorite();
+  };
+
+  const toggleFavorite = () => {
+    setIsFavorite((prev) => !prev); 
+  };
+
   return (
     <div>
       <div className="hero bg-white p-8 rounded-xl">
@@ -67,12 +77,57 @@ const ProductDetails = () => {
                 <li key={index}>{spec}</li>
               ))}
             </ol>
-            <p className="font-semibold">Rating</p>
-            <p>{rating}</p>
+            <p className="font-semibold flex gap-2">Rating</p>
+            <p>
+              <div className="rating">
+                <input
+                  type="radio"
+                  name="rating-2"
+                  className="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  className="mask mask-star-2 bg-orange-400"
+                  defaultChecked
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  className="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  className="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-2"
+                  className="mask mask-star-2 bg-orange-400"
+                />
+              </div>
+              {rating}
+            </p>
 
-            <button onClick={()=>{handleToCart(product_id);}} className="border-2 px-6 py-2 rounded-full border-purple-700 bg-[#9538E2] text-white flex items-center gap-2">
-              Add to Cart <IoMdCart />
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => {
+                  handleToCart(product_id);
+                }}
+                className="border-2 px-6 py-2 rounded-full border-purple-700 bg-[#9538E2] text-white flex items-center gap-2"
+              >
+                Add to Cart <IoMdCart />
+              </button>
+              <button
+                onClick={() => {
+                  handleFavouriteHeart(product_id);
+                }}
+                className={`text-3xl ${isFavorite ? "text-red-500" : ""}`}
+              >
+                {isFavorite ? <FaHeart /> : <FaRegHeart />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
