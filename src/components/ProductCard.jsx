@@ -6,7 +6,7 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate(); 
 
   const handleBuyNow = () => {
-    navigate("/productdetails"); 
+    navigate(`/productdetails/${product_title}`); 
   };
 
   return (
