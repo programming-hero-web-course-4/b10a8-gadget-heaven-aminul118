@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
+import { addToStoredList } from "../utility/addToDatabase";
 
 const ProductDetails = () => {
   const { productname } = useParams();
@@ -19,6 +20,7 @@ const ProductDetails = () => {
   }
 
   const {
+    product_id,
     product_title,
     product_image,
     price,
@@ -26,8 +28,13 @@ const ProductDetails = () => {
     Specification,
     rating,
     availability,
+    
   } = newProduct;
 
+
+  const handleToCart=(id)=>{
+    addToStoredList(id)
+  }
   return (
     <div>
       <div className="hero bg-white p-8 rounded-xl">
@@ -63,7 +70,7 @@ const ProductDetails = () => {
             <p className="font-semibold">Rating</p>
             <p>{rating}</p>
 
-            <button className="border-2 px-6 py-2 rounded-full border-purple-700 bg-[#9538E2] text-white flex items-center gap-2">
+            <button onClick={()=>{handleToCart(product_id);}} className="border-2 px-6 py-2 rounded-full border-purple-700 bg-[#9538E2] text-white flex items-center gap-2">
               Add to Cart <IoMdCart />
             </button>
           </div>
