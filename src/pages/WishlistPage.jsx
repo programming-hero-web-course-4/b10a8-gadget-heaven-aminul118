@@ -1,9 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import {
-  getStoredWishList,
-  removeFromWishlist,
-} from "../utility/addToDatabase";
+import { getStoredWishList } from "../utility/addToDatabase";
 import { MdDelete } from "react-icons/md";
 
 const WishlistPage = ({ allProducts }) => {
@@ -24,9 +21,8 @@ const WishlistPage = ({ allProducts }) => {
     const updatedCartList = cartList.filter(
       (product) => product.product_id !== product_id
     );
-    setCartList(updatedCartList);
 
-    removeFromWishlist(product_id);
+    setCartList(updatedCartList);
 
     const updatedStoredList = updatedCartList.map(
       (product) => product.product_id
@@ -70,7 +66,7 @@ const WishlistPage = ({ allProducts }) => {
           ))}
         </div>
       ) : (
-        <p>Your wishlist is empty.</p>
+        <p>Your cart is empty.</p>
       )}
     </div>
   );
