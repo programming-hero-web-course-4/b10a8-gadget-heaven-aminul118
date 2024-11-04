@@ -1,0 +1,40 @@
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+
+const ProductCard = ({ product }) => {
+  const { product_image, product_title, price } = product;
+  const navigate = useNavigate(); 
+
+  const handleBuyNow = () => {
+    navigate("/productdetails"); 
+  };
+
+  return (
+    <div>
+      <div className="card bg-base-100 h-full border">
+        <figure className="px-10 pt-10 h-64">
+          <img src={product_image} alt={product_title} className="rounded-xl" />
+        </figure>
+        <div className="card-body items-center text-center">
+          <h2 className="card-title">{product_title}</h2>
+          <p>Price: {price} k</p>
+          <div className="card-actions">
+            <button onClick={handleBuyNow} className="btn btn-primary">
+              Buy Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    product_image: PropTypes.string.isRequired,
+    product_title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+export default ProductCard;

@@ -3,7 +3,7 @@ import Heading from "./Heading";
 const Footer = () => {
     return (
       <div>
-        <section className="container mx-auto">
+        <section className="container mx-auto mt-16">
           <Heading
             title={`Gadget Heaven`}
             subtitle={`Leading the way in cutting-edge technology and innovation.`}
@@ -31,6 +31,7 @@ const Footer = () => {
               <a className="link link-hover">Cookie policy</a>
             </nav>
           </footer>
+         
         </section>
       </div>
     );

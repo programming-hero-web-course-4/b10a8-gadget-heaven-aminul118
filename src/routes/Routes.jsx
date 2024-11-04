@@ -4,33 +4,45 @@ import Home from "../pages/Home";
 import ErrorPage from "../pages/ErrorPage";
 import Statistics from "../pages/Statistics";
 import Dashboard from "../pages/Dashboard";
-import Products from "../components/Products";
+import ProductCards from "../components/ProductCards";
+import ProductDetails from "../pages/ProductDetails";
+
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
-    errorElement: <ErrorPage></ErrorPage>,
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
-        children:[
-            {
-                path:'/',
-                element:<Products></Products>,
-                loader:()=>fetch('products.json')
-            }
-        ]
+        element: <Home />,
+        loader: () => fetch("../categories.json"),
+        children: [
+          {
+            path: "/",
+            element: <ProductCards />,
+            loader: () => fetch("../products.json"),
+          },
+          {
+            path: "category/:category",
+            element: <ProductCards />,
+            loader: ({ params }) =>
+              fetch(`../products.json?category=${params.category}`),
+          },
+        ],
       },
       {
-        path: "/statistics",
-        element: <Statistics></Statistics>,
+        path: '/productdetails',
+        element: <ProductDetails></ProductDetails>
       },
       {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        path: "statistics",
+        element: <Statistics />,
       },
-      
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
     ],
   },
 ]);
