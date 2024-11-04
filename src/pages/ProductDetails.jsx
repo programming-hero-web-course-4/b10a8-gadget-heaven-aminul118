@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import { IoMdCart } from "react-icons/io";
 
 const ProductDetails = () => {
   const { productname } = useParams();
@@ -62,8 +63,8 @@ const ProductDetails = () => {
             <p className="font-semibold">Rating</p>
             <p>{rating}</p>
 
-            <button className="border-2 px-6 py-2 rounded-full border-purple-700 bg-[#9538E2] text-white">
-              Add to Cart
+            <button className="border-2 px-6 py-2 rounded-full border-purple-700 bg-[#9538E2] text-white flex items-center gap-2">
+              Add to Cart <IoMdCart />
             </button>
           </div>
         </div>

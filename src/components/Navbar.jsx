@@ -54,10 +54,12 @@ const Navbar = () => {
             {navbarLinks}
           </ul>
         </div>
-        <div className="navbar-end text-2xl gap-4 text-white">
-          <NavLink className={`bg-blue-500 p-3 rounded-full`}>
+        <div className="navbar-end text-2xl gap-4 text-white relative">
+         <div className="absolute right-16 bottom-8 text-red-500 bg-white px-1 rounded-full text-sm font-semibold"><p>0</p></div>
+          <NavLink to='/dashboard' className={`bg-blue-500 p-3 rounded-full`}>
             <IoMdCart />
           </NavLink>
+          
           <NavLink className={`bg-blue-500 p-3 rounded-full`}>
             <FaRegHeart />
           </NavLink>
