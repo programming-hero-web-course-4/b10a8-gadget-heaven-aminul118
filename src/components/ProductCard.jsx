@@ -19,7 +19,10 @@ const ProductCard = ({ product }) => {
           <h2 className="card-title">{product_title}</h2>
           <p>Price: {price} k</p>
           <div className="card-actions">
-            <button onClick={handleBuyNow} className="btn btn-primary">
+            <button
+              onClick={handleBuyNow}
+              className="border-2 px-6 py-2 rounded-full border-purple-700 text-[#9538E2] hover:bg-[#9538E2] hover:text-white "
+            >
               Buy Now
             </button>
           </div>
