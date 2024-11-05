@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { getStoredList, getStoredWishList } from "../utility/addToDatabase";
 
 const Navbar = () => {
   const navbarLinks = (
@@ -16,6 +18,17 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const [cartCount, setCartCount] = useState([]);
+  useEffect(() => {
+    const storedList = getStoredList();
+    setCartCount(storedList);
+  }, [cartCount]);
+  const [wishListCount, setWishListCount] = useState([]);
+  useEffect(() => {
+    const storedList = getStoredWishList();
+    setWishListCount(storedList);
+  }, [wishListCount]);
 
   return (
     <div>
@@ -55,12 +68,16 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end text-2xl gap-4 text-white relative">
-         <div className="absolute right-16 bottom-8 text-red-500 bg-white px-1 rounded-full text-sm font-semibold"><p>0</p></div>
-          <NavLink to='/dashboard' className={`bg-blue-500 p-3 rounded-full`}>
+          <div className="absolute right-16 bottom-8 text-red-500 bg-white px-2 rounded-full text-sm font-semibold">
+            <p>{cartCount.length}</p>
+          </div>
+          <NavLink to="/dashboard" className={`bg-blue-500 p-3 rounded-full`}>
             <IoMdCart />
           </NavLink>
-          
-          <NavLink className={`bg-blue-500 p-3 rounded-full`}>
+          <div className="absolute bottom-8 text-red-500 bg-white px-2 rounded-full text-sm font-semibold">
+            <p>{wishListCount.length}</p>
+          </div>
+          <NavLink to={"/dashboard"} className={`bg-blue-500 p-3 rounded-full`}>
             <FaRegHeart />
           </NavLink>
         </div>
