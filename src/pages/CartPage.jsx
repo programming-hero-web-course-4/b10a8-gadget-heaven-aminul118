@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getStoredList } from "../utility/addToDatabase";
 import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const CartPage = ({ allProducts }) => {
   const [cartList, setCartList] = useState([]);
@@ -19,7 +20,8 @@ const CartPage = ({ allProducts }) => {
 
   const handleRemoveFromCart = (product_id) => {
     const updatedCartList = cartList.filter(
-      (product) => product.product_id !== product_id
+      (product) => product.product_id !== product_id,
+    toast.success('Remove Product')
     );
 
     setCartList(updatedCartList);
@@ -30,9 +32,39 @@ const CartPage = ({ allProducts }) => {
     localStorage.setItem("product-list", JSON.stringify(updatedStoredList));
   };
 
+  const handleSortByPrice = () => {
+    const sortedCartList = [...cartList].sort((a, b) => b.price - a.price);
+    setCartList(sortedCartList);
+    toast.success('Product Sort Listed')
+  };
+
+  const handlePurchasesbtn = () => {
+    setCartList([]);
+    localStorage.removeItem("product-list");
+  };
+
+ 
+  const totalCost = cartList.reduce(
+    (accumulator, product) => accumulator + product.price,
+    0
+  );
+
   return (
     <div>
-      <h2 className="text-2xl font-bold">Cart</h2>
+      <div>
+        <div className="flex justify-between">
+          <h2 className="text-2xl font-bold">Cart</h2>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl">Total Cost: ${totalCost.toFixed(2)}</h1>
+            <button onClick={handleSortByPrice} className="btn btn-primary">
+              Sort By Price
+            </button>
+            <button onClick={handlePurchasesbtn} className="btn btn-primary">
+              Purchase
+            </button>
+          </div>
+        </div>
+      </div>
       <p>Number of items: {cartList.length}</p>
 
       {cartList.length > 0 ? (

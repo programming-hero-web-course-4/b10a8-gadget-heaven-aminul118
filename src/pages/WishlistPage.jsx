@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getStoredWishList } from "../utility/addToDatabase";
 import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const WishlistPage = ({ allProducts }) => {
   const [cartList, setCartList] = useState([]);
@@ -19,7 +20,8 @@ const WishlistPage = ({ allProducts }) => {
 
   const handleRemoveFromCart = (product_id) => {
     const updatedCartList = cartList.filter(
-      (product) => product.product_id !== product_id
+      (product) => product.product_id !== product_id,
+      toast.success("Product Removed")
     );
 
     setCartList(updatedCartList);
