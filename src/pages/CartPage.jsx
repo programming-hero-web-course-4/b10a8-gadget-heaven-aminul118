@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getStoredList } from "../utility/addToDatabase";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import HelmetCompo from "../components/HelmetCompo";
 
 const CartPage = ({ allProducts }) => {
   const [cartList, setCartList] = useState([]);
@@ -21,7 +22,7 @@ const CartPage = ({ allProducts }) => {
   const handleRemoveFromCart = (product_id) => {
     const updatedCartList = cartList.filter(
       (product) => product.product_id !== product_id,
-    toast.success('Remove Product')
+      toast.success("Remove Product")
     );
 
     setCartList(updatedCartList);
@@ -35,15 +36,16 @@ const CartPage = ({ allProducts }) => {
   const handleSortByPrice = () => {
     const sortedCartList = [...cartList].sort((a, b) => b.price - a.price);
     setCartList(sortedCartList);
-    toast.success('Product Sort Listed')
+    toast.success("Product Sort Listed");
   };
 
   const handlePurchasesbtn = () => {
     setCartList([]);
     localStorage.removeItem("product-list");
+    // Modal Opening
+    document.getElementById("my_modal_2").showModal();
   };
 
- 
   const totalCost = cartList.reduce(
     (accumulator, product) => accumulator + product.price,
     0
@@ -51,6 +53,7 @@ const CartPage = ({ allProducts }) => {
 
   return (
     <div>
+      <HelmetCompo title={`Cart`}></HelmetCompo>
       <div>
         <div className="flex justify-between">
           <h2 className="text-2xl font-bold">Cart</h2>
@@ -100,6 +103,23 @@ const CartPage = ({ allProducts }) => {
       ) : (
         <p>Your cart is empty.</p>
       )}
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      {/* <button
+        className="btn"
+        onClick={() => document.getElementById("my_modal_2").showModal()}
+      >
+        open modal
+      </button> */}
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Payment Sucessfully</h3>
+          <p className="py-4">Thans for purchasing.</p>
+          <p className="py-4">Total Cost: {totalCost}</p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 };

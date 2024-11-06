@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import HelmetCompo from "../components/HelmetCompo";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const ErrorPage = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-orange-400 to-pink-500 text-white">
+      <HelmetCompo title={`Error Page`}></HelmetCompo>
       <div className="text-center">
         <h1 className="text-9xl font-bold">404</h1>
         <h2 className="text-3xl font-semibold mt-4">Oops! Page Not Found</h2>

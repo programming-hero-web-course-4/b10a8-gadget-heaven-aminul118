@@ -2,6 +2,7 @@ import { useState } from "react";
 import CartPage from "./CartPage";
 import WishlistPage from "./WishlistPage";
 import { useLoaderData } from "react-router-dom";
+import HelmetCompo from "../components/HelmetCompo";
 
 const Dashboard = () => {
   const [isCartView, setIsCartView] = useState(true);
@@ -14,6 +15,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      <HelmetCompo title={`Dashboard`}></HelmetCompo>
       <div className="hero bg-[#9538E2] rounded-3xl py-8 mb-8">
         <div className="hero-content text-center text-white">
           <div className="max-w-md">

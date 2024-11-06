@@ -6,6 +6,7 @@ import Statistics from "../pages/Statistics";
 import Dashboard from "../pages/Dashboard";
 import ProductCards from "../components/ProductCards";
 import ProductDetails from "../pages/ProductDetails";
+import ProductComplianceForm from "../pages/ProductComplinceForm";
 
 const routes = createBrowserRouter([
   {
@@ -40,11 +41,17 @@ const routes = createBrowserRouter([
       {
         path: "/statistics",
         element: <Statistics />,
+        loader: () => fetch("/products.json"),
       },
       {
         path: "/dashboard",
         element: <Dashboard />,
         loader: () => fetch("/products.json"),
+      },
+      {
+        path: "/complince",
+      element: <ProductComplianceForm></ProductComplianceForm>
+        // loader: () => fetch("/products.json"),
       },
     ],
   },

@@ -3,10 +3,12 @@ import HeroBannerImg from "../components/HeroBannerImg";
 import Heading from "../components/Heading";
 import Categories from "../components/Categories";
 import { Outlet } from "react-router-dom";
+import HelmetCompo from "../components/HelmetCompo";
 
 const Home = () => {
   return (
     <div>
+      <HelmetCompo title={`Home`}></HelmetCompo>
       {/* Header Section Starts */}
       <div className="relative">
         <HeroBanner></HeroBanner>

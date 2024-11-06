@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getStoredWishList } from "../utility/addToDatabase";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import HelmetCompo from "../components/HelmetCompo";
 
 const WishlistPage = ({ allProducts }) => {
   const [cartList, setCartList] = useState([]);
@@ -34,6 +35,7 @@ const WishlistPage = ({ allProducts }) => {
 
   return (
     <div>
+      <HelmetCompo title={`WishList`}></HelmetCompo>
       <h2 className="text-2xl font-bold">WishList</h2>
       <p>Number of items: {cartList.length}</p>
 

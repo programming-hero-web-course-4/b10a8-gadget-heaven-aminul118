@@ -14,7 +14,10 @@ const Navbar = () => {
         <NavLink to={`/statistics`}>Statistics</NavLink>
       </li>
       <li>
-        <NavLink to={`dashboard`}>Dashboard</NavLink>
+        <NavLink to={`/dashboard`}>Dashboard</NavLink>
+      </li>
+      <li>
+        <NavLink to={`/complince`}>Complince</NavLink>
       </li>
     </>
   );
@@ -23,12 +26,13 @@ const Navbar = () => {
   useEffect(() => {
     const storedList = getStoredList();
     setCartCount(storedList);
-  }, [cartCount]);
+  }, []); // Remove cartCount from the dependency array
+
   const [wishListCount, setWishListCount] = useState([]);
   useEffect(() => {
     const storedList = getStoredWishList();
     setWishListCount(storedList);
-  }, [wishListCount]);
+  }, []); // Remove wishListCount from the dependency array
 
   return (
     <div>
