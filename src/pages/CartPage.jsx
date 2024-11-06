@@ -111,10 +111,10 @@ const CartPage = ({ allProducts }) => {
         open modal
       </button> */}
       <dialog id="my_modal_2" className="modal">
-        <div className="modal-box">
+        <div className="modal-box text-center">
           <h3 className="font-bold text-lg">Payment Sucessfully</h3>
           <p className="py-4">Thans for purchasing.</p>
-          <p className="py-4">Total Cost: {totalCost}</p>
+          {/* <p className="py-4">Total Cost: {totalCost}</p> */}
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
